@@ -1,8 +1,7 @@
 ## Welcome to the 3D Game Template [URP]
-
 This template is intended to provides a starting point for a 3D game project using the Universal Render Pipeline.
 
-It includes common systems & features required for most 3D games:
+### It includes common systems & features required for most 3D games:
 - State Machine (Singleton Instance)
 - UIManager
 - LevelManager
@@ -12,14 +11,8 @@ It includes common systems & features required for most 3D games:
 - Top-down 3D character controller
 - And more...
 
-
-## Learn More:
-- [[WikiPage:TemplateInfo/GettingStarted]]
-
 ## References:
 - [The Level Design Book](https://book.leveldesignbook.com/)
-
-
 
 ## Assets used licensed under CC0:
 - [Kay Lousberg Mini-Game Variety Pack](https://kaylousberg.itch.io/kay-kit-mini-game-variety-pack)

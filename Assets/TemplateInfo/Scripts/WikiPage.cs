@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WikiPage", menuName = "Wiki/Page")]
+[CreateAssetMenu(fileName = "ReadmePage", menuName = "Readme/Page")]
 public class WikiPage : ScriptableObject
 {
     public string title;
