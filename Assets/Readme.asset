@@ -9,26 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Script: {fileID: 11500000, guid: bc37f1eaf9dfbf04c9c1a80ff29e95a5, type: 3}
   m_Name: Readme
   m_EditorClassIdentifier: 
-  title: 3D Game Template [Universal Rendering Pipeline]
-  markdownContent: "\r## Welcome to the 3D Game Template [URP]\nThis template is
-    intended to provides a starting point for a 3D game project using the Universal
-    Render Pipeline.\n\n### It includes common systems & features required for most
-    3D games:\n- State Machine (Singleton Instance)\n- UIManager\n- LevelManager\n-
-    InputManager\n- First-person character controller\n- Third-person character controller\n-
-    Top-down 3D character controller\n- And more...\n\n## References:\r\r\n- [The
-    Level Design Book](https://book.leveldesignbook.com/)\r\n\n## Assets used licensed
-    under CC0:\r\r\n- [Kay Lousberg Mini-Game Variety Pack](https://kaylousberg.itch.io/kay-kit-mini-game-variety-pack)\r\n-
-    [Kay Lousberg Prototype Bits](https://kaylousberg.itch.io/prototype-bits)\r\n-
-    [Kenney Mini Characters](https://www.kenney.nl/assets/mini-characters-1)\r\n-
-    [Kenney Input Prompts](https://kenney.nl/assets/input-prompts)\r\n- [Quaternius
-    Ultimate Platformer Pack](https://quaternius.itch.io/ultimate-platformer-pack)\r\n\n##
-    Shaders used licensed under MIT License\r\n- [Outline Post Process in Unity Shader
-    Graph URP](https://github.com/daniel-ilett/shaders-fullscreen-outlines)\r\n-
-    [Shader Graph Custom Lighting](https://github.com/Cyanilux/URP_ShaderGraphCustomLighting)"
-  icon: {fileID: 2800000, guid: 727a75301c3d24613a3ebcec4a24c2c8, type: 3}
+  title: 
+  markdownContent: 
+  icon: {fileID: 0}
   links: []
   sections: []
   loadedLayout: 0
