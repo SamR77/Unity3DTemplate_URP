@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Readme
   m_EditorClassIdentifier: 
   title: 3D Game Template [Universal Rendering Pipeline]
-  markdownContent: "\r## Welcome to the 3D Game Template [URP]\n\nThis template is
+  markdownContent: "\r## Welcome to the 3D Game Template [URP]\nThis template is
     intended to provides a starting point for a 3D game project using the Universal
-    Render Pipeline.\n\nIt includes common systems & features required for most 3D
-    games:\n- State Machine (Singleton Instance)\n- UIManager\n- LevelManager\n-
+    Render Pipeline.\n\n### It includes common systems & features required for most
+    3D games:\n- State Machine (Singleton Instance)\n- UIManager\n- LevelManager\n-
     InputManager\n- First-person character controller\n- Third-person character controller\n-
-    Top-down 3D character controller\n- And more...\n\n\r\n## Learn More:\r\n- [[WikiPage:TemplateInfo/GettingStarted]]\r\n\n##
-    References:\r\r\n- [The Level Design Book](https://book.leveldesignbook.com/)\r\n\n\n\n##
-    Assets used licensed under CC0:\r\r\n- [Kay Lousberg Mini-Game Variety Pack](https://kaylousberg.itch.io/kay-kit-mini-game-variety-pack)\r\n-
+    Top-down 3D character controller\n- And more...\n\n## References:\r\r\n- [The
+    Level Design Book](https://book.leveldesignbook.com/)\r\n\n## Assets used licensed
+    under CC0:\r\r\n- [Kay Lousberg Mini-Game Variety Pack](https://kaylousberg.itch.io/kay-kit-mini-game-variety-pack)\r\n-
     [Kay Lousberg Prototype Bits](https://kaylousberg.itch.io/prototype-bits)\r\n-
     [Kenney Mini Characters](https://www.kenney.nl/assets/mini-characters-1)\r\n-
     [Kenney Input Prompts](https://kenney.nl/assets/input-prompts)\r\n- [Quaternius

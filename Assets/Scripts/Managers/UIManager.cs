@@ -5,6 +5,12 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
+    [Header("UI Menu Objects")]
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject mainMenuUI;
+    [SerializeField] private GameObject gameplayUI;
+
+
     private static UIManager instance;
 
     public static UIManager Instance
@@ -34,5 +40,28 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+
+    public void ShowGameplayUI()
+    {
+        disableAllMenus();
+        gameplayUI.SetActive(true);
+    }
+    public void ShowMainMenu()
+    {
+        disableAllMenus();
+        mainMenuUI.SetActive(true);
+    }
+    public void ShowPauseMenu()
+    {
+        disableAllMenus();
+        pauseMenuUI.SetActive(true);
+    }
+    private void disableAllMenus()
+    {
+        pauseMenuUI.SetActive(false);
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(false);
     }
 }
