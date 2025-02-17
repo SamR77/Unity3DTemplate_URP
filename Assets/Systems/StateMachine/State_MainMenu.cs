@@ -8,7 +8,13 @@ using UnityEngine;
 
 public class State_MainMenu : IState
 {
-    public void EnterState(StateManager stateManager) { }
+    public void EnterState(StateManager stateManager) 
+    {
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        UIManager.Instance.ShowMainMenu();
+
+    }
 
     public void FixedUpdate(StateManager stateManager) { }
 

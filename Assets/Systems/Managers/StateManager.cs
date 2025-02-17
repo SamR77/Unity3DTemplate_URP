@@ -11,12 +11,6 @@ public class StateManager : MonoBehaviour
 {
 
 
-    
-
-
-
-
-
     [Header("Debug (read only)")]
     [SerializeField] private string lastActiveState;
     [SerializeField] private string currentActiveState;
@@ -153,13 +147,13 @@ public class StateManager : MonoBehaviour
 
 
 
-    public void GameInit() { SwitchToState(state_Init); }
+    public void LoadGameInit() { SwitchToState(state_Init); }
     // public void GameOver() { SwitchToState(gameState_GameOver); }
     // public void OpenCredits() { SwitchToState(gameState_Credits); }
     // public void OpenOptions() { SwitchToState(gameState_Options); }
-    public void OpenMainMenu() { SwitchToState(state_MainMenu); }
+    public void LoadMainMenu() { SwitchToState(state_MainMenu); }
     public void GoBack() { SwitchToState(lastState); }
-    public void Gameplay() { SwitchToState(state_Gameplay); }
+    public void LoadGameplay() { SwitchToState(state_Gameplay); }
 
 
 

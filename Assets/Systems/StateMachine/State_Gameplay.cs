@@ -8,7 +8,17 @@ using UnityEngine;
 
 public class State_Gameplay : IState
 {
-    public void EnterState(StateManager stateManager) { }
+    public void EnterState(StateManager stateManager) 
+    {
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        UIManager.Instance.ShowGameplayUI();
+
+        // sUBSCRIBE TO PAUSEEVENT ACTION
+
+        InputManager.Instance.PauseEvent += StateManager.Instance.Pause;
+
+    }
 
     public void FixedUpdate(StateManager stateManager) { }
 
@@ -16,6 +26,9 @@ public class State_Gameplay : IState
 
     public void LateUpdate(StateManager stateManager) { }
 
-    public void ExitState(StateManager stateManager) { }
+    public void ExitState(StateManager stateManager) 
+    {
+        InputManager.Instance.PauseEvent -= StateManager.Instance.Pause;
+    }
 
 }

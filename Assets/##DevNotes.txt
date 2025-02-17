@@ -1,0 +1,4 @@
+Notes and thoughts...
+
+Consider adding UIButtonManager just to handle all UI Buttons
+Implement Level Manager have MainMenu Be its own Scene vs Gameplay (this allows to setup a nice background for Main Menu)

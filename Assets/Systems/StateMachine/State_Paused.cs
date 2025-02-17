@@ -8,7 +8,16 @@ using UnityEngine;
 
 public class State_Paused : IState
 {
-    public void EnterState(StateManager stateManager) { }
+    public void EnterState(StateManager stateManager) 
+    {
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        UIManager.Instance.ShowPauseMenu();
+
+
+        InputManager.Instance.PauseEvent += StateManager.Instance.Resume;
+
+    }
 
     public void FixedUpdate(StateManager stateManager) { }
 
@@ -16,5 +25,8 @@ public class State_Paused : IState
 
     public void LateUpdate(StateManager stateManager) { }
 
-    public void ExitState(StateManager stateManager) { }
+    public void ExitState(StateManager stateManager)
+    {
+        InputManager.Instance.PauseEvent -= StateManager.Instance.Resume;
+    }
 }

@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
         disableAllMenus();
         pauseMenuUI.SetActive(true);
     }
-    private void disableAllMenus()
+    public void disableAllMenus()
     {
         pauseMenuUI.SetActive(false);
         mainMenuUI.SetActive(false);
