@@ -59,39 +59,49 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
     }
 
 
-
-
-
-
-
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        MoveEvent?.Invoke(context.ReadValue<Vector2>());
-        Debug.Log("Move Input Performed");
-    }
-
-    public void OnPause(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            PauseEvent?.Invoke();
-            Debug.Log("Pause Input Performed");
-        }
-    }
-
-
-
-
     #region Input Events
-
-    public event Action PauseEvent;
     public event Action<Vector2> MoveEvent;
-
+    public event Action<Vector2> LookEvent;
+    public event Action JumpEvent;
+    public event Action<bool> SprintEvent;
+    public event Action<bool> CrouchEvent;
+    public event Action PauseEvent;
     #endregion
 
 
 
-}
 
+
+    #region Input Callbacks
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        MoveEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        LookEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started) JumpEvent?.Invoke();
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        SprintEvent?.Invoke(context.started || context.performed);
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        CrouchEvent?.Invoke(context.started || context.performed);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.started) PauseEvent?.Invoke();
+    }
+    #endregion
+}
 
