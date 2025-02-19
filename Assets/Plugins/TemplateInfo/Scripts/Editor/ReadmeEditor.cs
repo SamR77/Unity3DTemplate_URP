@@ -13,7 +13,7 @@ public class ReadmeEditor : Editor
 {
     static string s_ShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
 
-    static string s_ReadmeSourceDirectory = "Assets/TemplateInfo";
+    static string s_ReadmeSourceDirectory = "Assets/Plugins/TemplateInfo";
 
     const float k_Space = 16f;
 
@@ -101,22 +101,22 @@ public class ReadmeEditor : Editor
 
     static void LoadLayout()
     {
-        var assembly = typeof(EditorApplication).Assembly;
-        var windowLayoutType = assembly.GetType("UnityEditor.TryWindowLayout", true);
-        var method = windowLayoutType.GetMethod("TryLoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
-        method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "TemplateInfo/Layout.wlt"), false });
+        // var assembly = typeof(EditorApplication).Assembly;
+        // var windowLayoutType = assembly.GetType("UnityEditor.TryWindowLayout", true);
+        // var method = windowLayoutType.GetMethod("TryLoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
+        // method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "Plugins/TemplateInfo/Layout.wlt"), false });
     }
 
-    static Readme SelectReadme()
+    static WikiPage SelectReadme()
     {
-        var ids = AssetDatabase.FindAssets("Readme t:Readme");
+        var ids = AssetDatabase.FindAssets("Readme t:WikiPage");
         if (ids.Length == 1)
         {
             var readmeObject = AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath(ids[0]));
 
             Selection.objects = new UnityEngine.Object[] { readmeObject };
 
-            return (Readme)readmeObject;
+            return (WikiPage)readmeObject;
         }
         else
         {
@@ -151,7 +151,7 @@ public class ReadmeEditor : Editor
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         // Navigation breadcrumb if this is a sub-page
-        if (!(target is Readme) && !currentlyEditing)
+        if (!(target.name.ToLower() == "readme") && !currentlyEditing)
         {
             if (GUILayout.Button("← Home", EditorStyles.miniButton, GUILayout.Width(60)))
             {
