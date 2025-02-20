@@ -73,7 +73,7 @@ public class FPS_PlayerCamera : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, -75f, 75f);
 
-        Debug.Log("xRotation: " + xRotation);
+
 
     }
 

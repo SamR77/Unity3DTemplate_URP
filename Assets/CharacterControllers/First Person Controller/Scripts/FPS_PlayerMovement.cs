@@ -2,120 +2,57 @@ using System;
 using UnityEngine;
 
 
+// Handles player movement using Rigidbody physics.
+// Uses input events from the InputManager.
 
 [RequireComponent(typeof(Rigidbody))]
 public class FPS_PlayerMovement : MonoBehaviour
 {
-    // https://www.youtube.com/watch?v=LqnPeqoJRFY&list=PLRiqz5jhNfSo-Fjsx3vv2kvYbxUDMBZ0u
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f; // Speed of player movement
 
-    float playerHeght = 2f;
-
-    [Header("Move Settings")]
-    public float moveSpeed = 10f;
-    float movementMultiplier = 10f;
-    [SerializeField] private float airMultiplier = 0.4f;
-
-    [Header("Jump Settings")]
-    public float jumpForce = 15f;
+    private Rigidbody rb; // Reference to the player's Rigidbody component
+    private Vector3 moveDirection; // Stores the movement direction
 
 
-    float groundDrag = 6f; 
-    float airDrag = 2f;
-
-    float verticalMovement;
-    float horizontalMovement;
-
-    bool isGrounded;
-
-    Vector3 moveDirection;
-
-    Rigidbody rb;
-
-
+    // Called when the script is enabled.
+    // Subscribes to the movement event in InputManager.
     private void OnEnable()
-    {
-        InputManager.Instance.MoveEvent += ReferenceMoveInputs;   
-        InputManager.Instance.JumpEvent += HandleJump;
+    {        
+            InputManager.Instance.MoveEvent += ReferenceMoveInputs;   
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        rb.freezeRotation = true; // Prevents rotation due to physics interactions
     }
 
     private void FixedUpdate()
     {
-        HandleMove();
+        MovePlayer();
     }
 
-    private void Update()
+    // Stores the player's movement input.
+    private void ReferenceMoveInputs(Vector2 inputVector)
     {
-        isGrounded = Physics.Raycast(this.transform.position, Vector3.down, playerHeght / 2 + 0.1f);
-
-        HandleDrag();        
+        moveDirection = transform.right * inputVector.x + transform.forward * inputVector.y;
     }
 
 
-    private void HandleMove()
+    // Applies movement to the player's Rigidbody.
+    private void MovePlayer()
     {
-        if (isGrounded)
-        { 
-            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
-        }
-        else
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
-        }
-            
-        rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
-
-        //rb.AddForce(new Vector3(moveDirection.x, 0, moveDirection.y) * moveSpeed, ForceMode.Force);
+        Vector3 velocity = moveDirection * moveSpeed;
+        rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z); // Preserve vertical velocity (gravity)
     }
 
 
-    private void HandleJump()
-    {
-        if (isGrounded)
-        {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-
-    private void HandleDrag()
-    {
-        if (isGrounded)
-        { rb.drag = groundDrag; }
-        else
-        { rb.drag = airDrag; }
-    }
-
-
-    private void ReferenceMoveInputs(Vector2 moveInput)
-    {
-        verticalMovement = moveInput.y;
-        horizontalMovement = moveInput.x;
-
-        //Debug.Log("verticalMovement = :" + verticalMovement);
-        //Debug.Log("horizontalMovement = :" + horizontalMovement);
-
-        moveDirection = transform.forward * verticalMovement + transform.right * horizontalMovement;
-
-        //Debug.Log("moveDirection = :" + moveDirection);
-    }
-
-
-
-
+    // Called when the script is disabled.
+    // Unsubscribes from the movement event to prevent memory leaks.
     private void OnDisable()
     {
         InputManager.Instance.MoveEvent -= ReferenceMoveInputs;
-        InputManager.Instance.JumpEvent -= HandleJump;
     }
-
-
-
-
 
 }
