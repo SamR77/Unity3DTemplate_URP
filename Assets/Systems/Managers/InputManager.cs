@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
                 {
                     GameObject obj = new GameObject("InputManager");
                     instance = obj.AddComponent<InputManager>();
+                    DontDestroyOnLoad(obj);
                 }
             }
             return instance;
@@ -114,7 +115,7 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
 
 
 
-    private void OnDisable()
+    void OnDisable()
     {
         if (instance == this)
         {
@@ -122,11 +123,12 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
         }
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        if (inputs != null)
+        // If this instance is being destroyed (like exiting play mode), clear the reference
+        if (instance == this)
         {
-            inputs.Dispose();  // Prevent memory leaks
+            instance = null;
         }
     }
 }
