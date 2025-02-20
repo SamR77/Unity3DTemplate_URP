@@ -14,6 +14,8 @@ public class FPS_PlayerCamera : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Camera playerCamera;
 
+ 
+
 
     float inputX;
     float inputY;
@@ -71,20 +73,20 @@ public class FPS_PlayerCamera : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, -75f, 75f);
 
-        Debug.Log("xRotation: " + xRotation);
+
 
     }
 
     private void Update()
     {
         look();
+
     }
 
     private void look()
     {
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerTransform.rotation = Quaternion.Euler(0, yRotation, 0);
-
     }
 
 

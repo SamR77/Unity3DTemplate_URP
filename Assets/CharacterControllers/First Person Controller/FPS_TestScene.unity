@@ -843,50 +843,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1322268163
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1322268165}
-  - component: {fileID: 1322268164}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1322268164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322268163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cb55189c0f2254c9e50604a776c601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1322268165
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322268163}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1419098820
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,13 +928,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419098820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76eea03587e3a05478dc0bf1cee6c275, type: 3}
+  m_Script: {fileID: 11500000, guid: 08273305a86cc7144abfaf2dedf06a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSensitivityX: 5
-  inputSensitivityY: 5
-  playerTransform: {fileID: 0}
-  playerCamera: {fileID: 0}
+  horizontalSensitivity: 10
+  verticalSensitivity: 7.5
+  maxLookUpAngle: 75
+  maxLookDownAngle: -75
+  playerCamera: {fileID: 1914715518}
 --- !u!1 &1709592016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1000,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709592016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1396,5 +1353,4 @@ SceneRoots:
   - {fileID: 203844589}
   - {fileID: 1160234427}
   - {fileID: 1419098823}
-  - {fileID: 1322268165}
   - {fileID: 396768955}
