@@ -5,6 +5,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour
@@ -155,7 +156,21 @@ public class StateManager : MonoBehaviour
     public void GoBack() { SwitchToState(lastState); }
     public void LoadGameplay() { SwitchToState(state_Gameplay); }
 
+    public void Quit() 
+    {
+        // Close the application
+        Application.Quit();
 
+
+        // If running in the Unity Editor, stop playing the game
+        if (EditorApplication.isPlaying)
+        {
+            EditorApplication.isPlaying = false;
+        }
+    }
+
+
+    
 
 
 
