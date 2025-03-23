@@ -2,9 +2,6 @@
 // NSCC Truro 2025
 // This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -162,11 +159,13 @@ public class StateManager : MonoBehaviour
         Application.Quit();
 
 
+        /*
         // If running in the Unity Editor, stop playing the game
         if (EditorApplication.isPlaying)
         {
             EditorApplication.isPlaying = false;
         }
+        */
     }
 
 
