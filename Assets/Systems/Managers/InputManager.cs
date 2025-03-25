@@ -11,10 +11,10 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
     #region Singleton
     private static InputManager instance;
 
-  
+
     // Provides global access to the InputManager instance.
     // If no instance exists, it creates one automatically.
-  
+
     public static InputManager Instance
     {
         get
@@ -98,7 +98,7 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        SprintEvent?.Invoke(context.started || context.performed);
+        SprintEvent?.Invoke(context.performed);
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

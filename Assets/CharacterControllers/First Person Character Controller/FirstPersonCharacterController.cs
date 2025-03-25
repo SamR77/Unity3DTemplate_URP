@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Android;
 
 // Sam Robichaud 
 // NSCC Truro 2025
@@ -11,9 +13,9 @@ using UnityEngine;
 public class FirstPersonCharacterController : MonoBehaviour
 {
     [Header("Move Settings")]
-    [SerializeField] private float crouchMoveSpeed = 2;
-    [SerializeField] private float walkMoveSpeed = 3;
-    [SerializeField] private float sprintMoveSpeed = 5;
+    [SerializeField] private float crouchMoveSpeed = 0.5f;
+    [SerializeField] private float walkMoveSpeed = 4;
+    [SerializeField] private float sprintMoveSpeed = 10;
 
     [Header("Look Settings")]
     [SerializeField] private float horizontalLookSensitivity = 15;
@@ -43,6 +45,8 @@ public class FirstPersonCharacterController : MonoBehaviour
 
     private bool isCrouching;
     private bool crouchTransitioning;
+
+    public bool isSprinting = false;
 
 
 
@@ -93,8 +97,34 @@ public class FirstPersonCharacterController : MonoBehaviour
         // Step 2: Convert local movement into world space based on player’s orientation
         Vector3 worldMoveDirection = transform.TransformDirection(moveInputDirection);
 
-        // Step 3: Apply movement to the CharacterController
-        characterController.Move(worldMoveDirection * walkMoveSpeed * Time.deltaTime);
+
+        // Step 3: Set movespeed based on input or state
+
+        // TODO: add logic to only allow sprinting if player is moving forward
+        // TODO: add air control speed when the player is not grounded
+        // TODO: When player is not grounded and becomes grounded again... reset isSprinting back to false (maintain speed momentum during jump but sprint has to be pressed again)
+
+        float moveSpeed;
+
+        if (isCrouching == true)
+        {
+            moveSpeed = crouchMoveSpeed;
+        }
+        else if (isSprinting == true)
+        {
+            moveSpeed = sprintMoveSpeed;
+        }
+        else
+        {
+            moveSpeed = walkMoveSpeed;
+        }
+
+
+
+
+
+        // Step 4: Apply movement to the CharacterController
+        characterController.Move(worldMoveDirection * moveSpeed * Time.deltaTime);
     }
 
     private void HandleLook()
@@ -203,14 +233,21 @@ public class FirstPersonCharacterController : MonoBehaviour
         StartCoroutine(HandleCrouchStand());
     }
 
+    private void SetSprintBool(bool sprintInput)
+    {
+
+            isSprinting = sprintInput;
+
+    }
 
 
 
-    private void OnEnable()
+        private void OnEnable()
     {
 
         InputManager.Instance.LookEvent += SetLookInput;
         InputManager.Instance.MoveEvent += SetMoveInput;
+        InputManager.Instance.SprintEvent += SetSprintBool;
         InputManager.Instance.JumpEvent += HandleJump;
         InputManager.Instance.CrouchEvent += HandleCrouchInput;
 
@@ -222,6 +259,7 @@ public class FirstPersonCharacterController : MonoBehaviour
     {
         InputManager.Instance.LookEvent -= SetLookInput;
         InputManager.Instance.MoveEvent -= SetMoveInput;
+        InputManager.Instance.SprintEvent -= SetSprintBool;
         InputManager.Instance.JumpEvent -= HandleJump;
         InputManager.Instance.CrouchEvent -= HandleCrouchInput;
 
