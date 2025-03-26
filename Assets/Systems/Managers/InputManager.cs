@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 // The InputManager handles all player input and distributes it via events.
 // It follows the Singleton pattern to ensure only one instance exists at all times.
 
+[DefaultExecutionOrder(-2)]
 public class InputManager : MonoBehaviour, Inputs.IPlayerActions
 {
     #region Singleton

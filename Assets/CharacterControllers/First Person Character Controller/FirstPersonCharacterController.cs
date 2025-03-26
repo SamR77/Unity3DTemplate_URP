@@ -60,6 +60,7 @@ public class FirstPersonCharacterController : MonoBehaviour
     [SerializeField] private Transform cameraHolder;
 
 
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
