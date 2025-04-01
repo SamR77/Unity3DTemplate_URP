@@ -11,10 +11,21 @@ using UnityEngine;
 [DefaultExecutionOrder(-1)]
 public class ThirdPersonCharacterController : MonoBehaviour
 {
+    #region Class Variables
+
+    [SerializeField] private bool holdToSprint = true;  // true = HOLD to sprint, false = TOGGLE to sprint
+
+    public bool sprintingOn;
+
+
     [Header("Move Settings")]
-    [SerializeField] private float runAcceleration = 0.25f;
-    [SerializeField] private float runSpeed = 4.0f;
+    [SerializeField] private float walkAcceleration = 0.25f;
+    [SerializeField] private float walkSpeed = 4.0f;
     [SerializeField] private float drag = 0.1f;
+    [SerializeField] private float movingThreshold = 0.01f;
+
+    [SerializeField] private float sprintAcceleration = 0.25f;
+    [SerializeField] private float sprintSpeed = 0.25f;
 
     [Header("Look Settings")]
     [SerializeField] private float lookSensitivityHorizontal = 0.1f;
@@ -26,6 +37,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
 
 
+    private CharacterState characterState;
 
     private Vector2 cameraRotation = Vector2.zero;
     private Vector2 playerTargetRotation = Vector2.zero;
@@ -35,28 +47,60 @@ public class ThirdPersonCharacterController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     // Input References
-    private Vector2 moveInput;
+    public Vector2 moveInput;
     private Vector2 lookInput;
 
+    #endregion
 
+    #region Startup
 
- 
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        characterState = GetComponent<CharacterState>();
     }
 
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #region Update Logic
+
 
     // Update is called once per frame
     void Update()
     {
+        UpdateMomementState();
+        HandleLateralMovement();
+    }
+
+    private void UpdateMomementState()
+    {
+        bool isMovementInput = moveInput != Vector2.zero;                       // order of 
+        bool isMovingLaterally = IsMovingLaterally();                           // these 3 lines
+        bool isSprinting = sprintingOn == true && isMovingLaterally == true;    // matter
+
+
+      
+
+        CharacterMovementState lateralState = isSprinting ? CharacterMovementState.Sprinting : 
+                                              isMovingLaterally || isMovementInput ? CharacterMovementState.Walking :
+                                              CharacterMovementState.Idling;
+
+        characterState.SetCharacterMovementState(lateralState);
+
+    }
+
+
+    private void HandleLateralMovement()
+    {
+        // create quick reference for current state
+        bool isSprinting = characterState.currentCharacterMovementState == CharacterMovementState.Sprinting;
+        
+
+        // state dependant acceleration and speed
+        float lateralAcceleration = isSprinting ? sprintAcceleration : walkAcceleration;
+        float clampLateralMagnitude = isSprinting ? sprintSpeed : walkSpeed;
+
         // set cameraForward and cameraRight based on the objects XZ plane
         Vector3 cameraForwardXZ = new Vector3(playerCamera.transform.forward.x, 0f, playerCamera.transform.forward.z).normalized;
         Vector3 cameraRightXZ = new Vector3(playerCamera.transform.right.x, 0f, playerCamera.transform.right.z).normalized;
@@ -65,15 +109,15 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
 
         // Move delta is how much the player will move this frame
-        Vector3 moveDelta = moveDirection * runAcceleration * Time.deltaTime;
+        Vector3 moveDelta = moveDirection * lateralAcceleration * Time.deltaTime;
         // New velocity is the current characterControler velocity plus the moveDelta
         Vector3 newVelocity = characterController.velocity + moveDelta;
 
         // add drag to player
-        Vector3  currentDrag = newVelocity.normalized * drag * Time.deltaTime;
+        Vector3 currentDrag = newVelocity.normalized * drag * Time.deltaTime;
         // Ternary operator (if newVelocity.magnitude is greater than drag, subtract drag from newVelocity, else set newVelocity to zero)
         newVelocity = (newVelocity.magnitude > drag * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
-        newVelocity = Vector3.ClampMagnitude(newVelocity, runSpeed);
+        newVelocity = Vector3.ClampMagnitude(newVelocity, clampLateralMagnitude);
 
 
 
@@ -81,8 +125,11 @@ public class ThirdPersonCharacterController : MonoBehaviour
         // apply movment to characterController, Time.deltaTime is used to normalize the movement to be frame rate independent
         // Note: characterController.Move (Unity suggegts only callinmg this once per frame to avoid issues)
         characterController.Move(newVelocity * Time.deltaTime);
-
     }
+
+    #endregion
+
+    #region LateUpdate Logic
 
     private void LateUpdate()
     {
@@ -94,6 +141,19 @@ public class ThirdPersonCharacterController : MonoBehaviour
 
         playerCamera.transform.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0f);
     }
+
+    #endregion
+
+    #region State Checks
+
+    private bool IsMovingLaterally()
+    {
+        Vector3 laeralVelocity = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
+
+        return laeralVelocity.magnitude > movingThreshold;
+    }
+
+    #endregion
 
     #region Input methods
 
@@ -107,12 +167,43 @@ public class ThirdPersonCharacterController : MonoBehaviour
         lookInput = new Vector2(inputVector.x, inputVector.y);
     }
 
+    
+
+    private void SprintInputStarted()
+    {
+        if(holdToSprint == true)
+        {
+            sprintingOn = true;
+        }
+        else if (holdToSprint == false)
+        {
+            sprintingOn = !sprintingOn;
+        }
+    }
+
+    private void SprintInputCanceled()
+    {
+        if(holdToSprint == true)
+        {
+            sprintingOn = false;
+        }
+        else if (holdToSprint == false)
+        {
+            return;
+        }
+        
+    }
+
+
 
     private void OnEnable()
     {
         InputManager.Instance.LookEvent += SetLookInput;
         InputManager.Instance.MoveEvent += SetMoveInput;
-        //InputManager.Instance.SprintEvent += SetSprintBool;
+        InputManager.Instance.SprintStartedEvent += SprintInputStarted;
+        InputManager.Instance.SprintCanceledEvent += SprintInputCanceled;
+
+
         //InputManager.Instance.JumpEvent += HandleJump;
         //InputManager.Instance.CrouchEvent += HandleCrouchInput;
     }
@@ -123,10 +214,14 @@ public class ThirdPersonCharacterController : MonoBehaviour
     {
         InputManager.Instance.LookEvent -= SetLookInput;
         InputManager.Instance.MoveEvent -= SetMoveInput;
-        //InputManager.Instance.SprintEvent -= SetSprintBool;
+        InputManager.Instance.SprintStartedEvent -= SprintInputStarted;
+        InputManager.Instance.SprintCanceledEvent -= SprintInputCanceled;
+
         //InputManager.Instance.JumpEvent -= HandleJump;
         //InputManager.Instance.CrouchEvent -= HandleCrouchInput;
     }
+
+
 
     #endregion
 }

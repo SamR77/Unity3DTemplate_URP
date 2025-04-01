@@ -11986,6 +11986,39 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1242720931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5364771304469096680, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5523304166544139817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1242720935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242720931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96fa916b972ac424aae312e06a0d7b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1728739677}
+  animationBlendSpeed: 0.02
+--- !u!114 &1242720936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242720931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d45a291fad87f44ad54ab9c35ee05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <currentCharacterMovementState>k__BackingField: 0
 --- !u!1 &1296932439
 GameObject:
   m_ObjectHideFlags: 0
@@ -16929,6 +16962,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1543758600}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1728739677 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1900505419260170561, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5523304166544139817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1871180911
 GameObject:
   m_ObjectHideFlags: 0
@@ -18504,23 +18543,50 @@ PrefabInstance:
     - target: {fileID: 1900505419260170561, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform
-        'mixamorig:RightFoot'\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tTransform
-        'mixamorig:LeftArm'\n\tTransform 'mixamorig:RightHand'\n\tand more ...\n\tFrom
-        animation clip 'Idle'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5364771304469096680, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
         type: 3}
       propertyPath: m_Name
       value: ThirdPersonCharacterController
       objectReference: {fileID: 0}
+    - target: {fileID: 7389577563313780443, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      propertyPath: drag
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389577563313780443, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      propertyPath: sprintSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389577563313780443, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      propertyPath: holdToSprint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389577563313780443, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      propertyPath: walkAcceleration
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389577563313780443, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      propertyPath: sprintAcceleration
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5364771304469096680, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1242720936}
+    - targetCorrespondingSourceObject: {fileID: 5364771304469096680, guid: 9e43d36f24a5b7749be79c2b8085aa2a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1242720935}
   m_SourcePrefab: {fileID: 100100000, guid: 9e43d36f24a5b7749be79c2b8085aa2a, type: 3}
 --- !u!1001 &8087061585976209773
 PrefabInstance:

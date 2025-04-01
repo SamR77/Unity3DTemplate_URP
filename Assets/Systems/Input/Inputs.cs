@@ -138,7 +138,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""3d13c934-9ba2-467d-a91d-60ad9d67c072"",
                     ""expectedControlType"": """",
                     ""processors"": """",

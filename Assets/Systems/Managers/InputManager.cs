@@ -72,7 +72,9 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
     public event Action<Vector2> MoveEvent;
     public event Action<Vector2> LookEvent;
     public event Action JumpEvent;
-    public event Action<bool> SprintEvent;
+    //public event Action<bool> SprintEvent;
+    public event Action SprintStartedEvent;
+    public event Action SprintCanceledEvent;
     public event Action CrouchEvent;
     public event Action PauseEvent;
     #endregion
@@ -98,8 +100,9 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerActions
     }
 
     public void OnSprint(InputAction.CallbackContext context)
-    {
-        SprintEvent?.Invoke(context.performed);
+    {        
+        if (context.started) SprintStartedEvent?.Invoke();
+        else if (context.canceled) SprintCanceledEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

@@ -248,7 +248,7 @@ public class FirstPersonCharacterController : MonoBehaviour
 
         InputManager.Instance.LookEvent += SetLookInput;
         InputManager.Instance.MoveEvent += SetMoveInput;
-        InputManager.Instance.SprintEvent += SetSprintBool;
+        //InputManager.Instance.SprintEvent += SetSprintBool;
         InputManager.Instance.JumpEvent += HandleJump;
         InputManager.Instance.CrouchEvent += HandleCrouchInput;
 
@@ -260,7 +260,7 @@ public class FirstPersonCharacterController : MonoBehaviour
     {
         InputManager.Instance.LookEvent -= SetLookInput;
         InputManager.Instance.MoveEvent -= SetMoveInput;
-        InputManager.Instance.SprintEvent -= SetSprintBool;
+        //InputManager.Instance.SprintEvent -= SetSprintBool;
         InputManager.Instance.JumpEvent -= HandleJump;
         InputManager.Instance.CrouchEvent -= HandleCrouchInput;
 
